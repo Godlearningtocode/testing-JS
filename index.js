@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 
-/*export function capitalize(string) {
+export function capitalize(string) {
     let storage = string.split("")
     let firstCharacter = storage[0]
     storage[0] = storage[0].toUpperCase()
@@ -42,12 +42,36 @@ export function Calculator(a, b) {
     }
 }
 
-export*/ function CaesarCipher(string, shiftFactor) {
-    let alphabets = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'];
+export function CaesarCipher(message, shift) {
+  const shiftedAlphabet = [...Array(26)].map((_, i) =>
+  String.fromCharCode(((i + shift) % 26) + 65)
+);
 
-    for(let i = 0; i < alphabets.length; i++) {
-        if(string.toUpperCase() === alphabets[i]) return i
+const result = message.replace(/[a-z]/gi, (char) => {
+  const charCode = char.charCodeAt(0);
+  const index = charCode >= 97 ? charCode - 97 : charCode - 65;
+  
+  return shiftedAlphabet[index] || char;
+});
+
+return result;
+}
+
+export  function analyzeArray(array) {
+    let average = 0, min = array[0], max = array[0], length = array.length;
+
+    for(let i = 0; i < array.length; i++) {
+        average += array[i];
+        if(min > array[i]) min = array[i];
+        if(max < array[i]) max = array[i];
+    }
+
+    return {
+        average: Math.round(average/length),
+        min: min,
+        max: max,
+        length: length
     }
 }
 
-console.log(CaesarCipher('a', 5))
+console.log(analyzeArray([1, 8, 3, 4, 2, 6]))

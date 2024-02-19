@@ -1,6 +1,8 @@
 import { capitalize } from './index.js';
 import { reverseString } from './index.js';
 import { Calculator } from './index.js';
+import { CaesarCipher } from './index.js';
+import { analyzeArray } from './index.js';
 
 test('returns first character as upperCase for a string', () => {
     expect(capitalize('asgvahsbdb')).toBeTruthy()
@@ -56,4 +58,20 @@ test('returns the difference between two numbers', () => {
 test('returns the difference between two numbers', () => {
     let division = new Calculator;
     expect(division.divide(199360, 3115)).toEqual(64)
+})
+
+test('returns a caesar cipher for a string', () => {
+    expect(CaesarCipher('Hello, World!', 4)).toMatch(/LIPPS, ASVPH!/)
+})
+
+test('returns a caesar cipher for a string', () => {
+    expect(CaesarCipher('Hello, World!', 5)).toMatch(/MJQQT, BTWQI!/)
+})
+
+test('returns average, min, max and length of an array', () => {
+    expect(analyzeArray([1, 8, 3, 4, 2, 6])).toMatchObject({average: 4, min: 1, max: 8, length: 6})
+})
+
+test('returns average, min, max and length of an array', () => {
+    expect(analyzeArray([7, 6, 1, 9, 8, 4, 89, 4, 16, 48, 98, 321])).toMatchObject({average: 51, min: 1, max: 321, length: 12})
 })
